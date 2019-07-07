@@ -119,7 +119,7 @@ export function getComparePeriodLabels(comparePeriod: ComparePeriod): ComparePer
 		case ComparePeriod.Week:
 			return { prev: translate('last.week'), current: translate('this.week') };
 		case ComparePeriod.FourWeeks:
-			return { prev: translate('last.four.weeks'), current: translate('this.four.weeks') };
+			return { prev: translate('last.four.weeks'), current: translate('these.four.weeks') };
 		default:
 			throw new Error(`Unknown period value: ${comparePeriod}`);
 	}

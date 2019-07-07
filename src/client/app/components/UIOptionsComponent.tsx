@@ -218,9 +218,9 @@ class UIOptionsComponent extends React.Component<UIOptionsPropsWithIntl, UIOptio
 						outline
 					>
 						{ this.props.optionsVisibility ?
-							<FormattedMessage id='hide.options' />
+							<FormattedMessage id='hide.menu' />
 							:
-							<FormattedMessage id='show.options' />
+							<FormattedMessage id='show.menu' />
 						}
 					</Button>
 				</div>
