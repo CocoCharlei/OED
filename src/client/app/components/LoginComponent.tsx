@@ -19,6 +19,7 @@ interface LoginState {
 
 class LoginComponent extends React.Component<InjectedIntlProps, LoginState> {
 	private inputEmail: HTMLInputElement | null;
+	private inputPassword: HTMLInputElement | null;
 
 	constructor(props: InjectedIntlProps) {
 		super(props);
@@ -37,6 +38,12 @@ class LoginComponent extends React.Component<InjectedIntlProps, LoginState> {
 			margin: 'auto',
 			width: '50%'
 		};
+
+		const titleStyle: React.CSSProperties = {
+			textAlign: 'center'
+			paddingBottom: '35px'
+		};
+
 		const buttonStyle = {
 			marginTop: '10px'
 		};
@@ -50,28 +57,34 @@ class LoginComponent extends React.Component<InjectedIntlProps, LoginState> {
 		return (
 			<div>
 				<HeaderContainer />
-				<Form style={formStyle}>
-					<InputGroup>
-						<Input
-							type='text'
-							placeholder={formatMessage(messages.email)}
-							innerRef={c => { this.inputEmail = c; }}
-							value={this.state.email}
-							onChange={this.handleEmailChange}
-						/>
-					</InputGroup>
-					<InputGroup>
-						<Input
-							type='password'
-							placeholder={formatMessage(messages.password)}
-							value={this.state.password}
-							onChange={this.handlePasswordChange}
-						/>
-					</InputGroup>
-					<Button outline style={buttonStyle} type='submit' onClick={this.handleSubmit}>
-						<FormattedMessage id='submit' />
-					</Button>
-				</Form>
+				<div className='container-fluid'>
+					<h2 style={titleStyle}>
+						<FormattedMessage id='log.in' />
+					</h2>
+					<Form style={formStyle}>
+						<InputGroup>
+							<Input
+								type='text'
+								placeholder={formatMessage(messages.email)}
+								innerRef={c => { this.inputEmail = c; }}
+								value={this.state.email}
+								onChange={this.handleEmailChange}
+							/>
+						</InputGroup>
+						<InputGroup>
+							<Input
+								type='password'
+								placeholder={formatMessage(messages.password)}
+								innerRef={c => { this.inputPassword = c; }}
+								value={this.state.password}
+								onChange={this.handlePasswordChange}
+							/>
+						</InputGroup>
+						<Button outline style={buttonStyle} type='submit' onClick={this.handleSubmit}>
+							<FormattedMessage id='submit' />
+						</Button>
+					</Form>
+				</div>
 				<FooterComponent />
 			</div>
 		);
@@ -108,6 +121,8 @@ class LoginComponent extends React.Component<InjectedIntlProps, LoginState> {
 			} catch (err) {
 				if (err.response && err.response.status === 401) {
 					showErrorNotification(translate('invalid.email.password'));
+				} else if (this.inputEmail !== null && this.inputPassword !== null) {
+					showErrorNotification(translate('enter.email.password'));
 				} else {
 					// If there was a problem other than a lack of authorization, the user can't fix it.
 					// This is an irrecoverable state, so just throw an error and let the user know something went wrong
