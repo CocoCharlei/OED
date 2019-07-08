@@ -109,7 +109,13 @@ class EditGroupsComponent extends React.Component<EditGroupsPropsWithIntl, EditG
 							<p style={boldStyle}>
 								<FormattedMessage id='name' />:
 							</p>
-							<Input type='text' placeholder={this.props.intl.formatMessage(messages.name)} value={this.state.name} onChange={this.handleNameChange} />
+							<Input 
+								type='text' 
+								placeholder={this.props.intl.formatMessage(messages.name)} 
+								value={this.state.name} 
+								onChange={this.handleNameChange}
+								maxLength={50}
+							/>
 							<div className='row' style={metersDivStyle}>
 								<div className='col-5'>
 									<p style={boldStyle}>
@@ -203,10 +209,8 @@ class EditGroupsComponent extends React.Component<EditGroupsPropsWithIntl, EditG
 
 	private handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
 		const name = e.currentTarget.value;
-		if (name) {
-			this.setState({ name: name as string });
-			this.props.editGroupName(name as string);
-		}
+		this.setState({ name: name as string });
+		this.props.editGroupName(name as string);
 	}
 
 	private handleUpdatedSelectedMeters(selectedMeters: number[]) {

@@ -235,7 +235,7 @@ function submitNewGroup(group: t.GroupData): Thunk {
 		} catch (e) {
 			dispatch(markGroupInEditingNotSubmitted());
 			if (e.response !== undefined && e.response.status === 400) {
-				showErrorNotification(e.response.data.error);
+				showErrorNotification(translate('group.must.have.a.name'));
 			} else {
 				showErrorNotification(translate('failed.to.create.group'));
 			}
@@ -258,6 +258,8 @@ function submitGroupEdits(group: t.GroupData & t.GroupID): Thunk {
 			dispatch(markGroupInEditingNotSubmitted());
 			if (e.response.data.message && e.response.data.message === 'Cyclic group detected') {
 				showErrorNotification(translate('you.cannot.create.a.cyclic.group'));
+			} else if (e.response !== undefined && e.response.status === 400) {
+				showErrorNotification(translate('group.must.have.a.name'));
 			} else {
 				showErrorNotification(translate('failed.to.edit.group'));
 			}

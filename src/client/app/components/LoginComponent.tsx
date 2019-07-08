@@ -40,7 +40,7 @@ class LoginComponent extends React.Component<InjectedIntlProps, LoginState> {
 		};
 
 		const titleStyle: React.CSSProperties = {
-			textAlign: 'center'
+			textAlign: 'center',
 			paddingBottom: '35px'
 		};
 

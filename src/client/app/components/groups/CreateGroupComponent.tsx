@@ -64,7 +64,12 @@ class CreateGroupComponent extends React.Component<CreateGroupPropsWithIntl, {}>
 							<p style={textStyle}>
 								<FormattedMessage id='name' />:
 							</p>
-							<Input type='text' placeholder={this.props.intl.formatMessage(messages.name)} onChange={this.handleNameChange} />
+							<Input 
+								type='text' 
+								placeholder={this.props.intl.formatMessage(messages.name)} 
+								onChange={this.handleNameChange}
+								maxLength={50}
+							/>
 						</div>
 						<div style={divBottomStyle}>
 							<p style={textStyle}>
